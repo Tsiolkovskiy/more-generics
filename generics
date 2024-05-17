@@ -1,0 +1,46 @@
+// Generics
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+let num = identity<number>(42);
+let str = identity<string>("Hello, TypeScript!");
+
+// Type Inference
+let inferredNumber = 42; // inferred as number
+let inferredString = "Hello"; // inferred as string
+
+// Union and Intersection Types
+type Cat = { purr: () => void };
+type Dog = { bark: () => void };
+type CatDog = Cat & Dog;
+
+let pet: CatDog = {
+    purr: () => console.log("Purr..."),
+    bark: () => console.log("Bark!")
+};
+
+// Mapped Types
+type ReadOnly<T> = {
+    readonly [K in keyof T]: T[K];
+};
+
+type User = {
+    id: number;
+    name: string;
+};
+
+type ReadOnlyUser = ReadOnly<User>;
+
+// Conditional Types
+type IsNumber<T> = T extends number ? "Number" : "Not a number";
+
+type A = IsNumber<number>; // "Number"
+type B = IsNumber<string>; // "Not a number"
+
+console.log(num); // 42
+console.log(str); // Hello, TypeScript!
+console.log(inferredNumber); // 42
+console.log(inferredString); // Hello
+pet.purr(); // Purr...
+pet.bark(); // Bark!
